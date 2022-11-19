@@ -1,0 +1,39 @@
+{
+  "name": "vaibhav17-server.github.io",
+  "version": "1.0.0",
+  "description": "server for vaibhava17",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --watchAll --detectOpenHandles",
+    "start": "nodemon server.js",
+    "data:import": "node seeder",
+    "data:destroy": "node seeder -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaibhava17/vaibhav17-server.github.io.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "vaibhava17",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaibhava17/vaibhav17-server.github.io/issues"
+  },
+  "homepage": "https://github.com/vaibhava17/vaibhav17-server.github.io#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
+    "mongoose": "^6.7.2",
+    "mongoose-aggregate-paginate-v2": "^1.0.6",
+    "nanoid": "^4.0.0"
+  }
+}
