@@ -3,14 +3,14 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 
 // sample data
-const { user } = require("./data/user.data.js");
-const { blogs } = require("./data/blogs.data.js");
-const { mails } = require("./data/mails.data.js");
+const { user } = require("../data/user.data.js");
+const { blogs } = require("../data/blogs.data.js");
+const { mails } = require("../data/mails.data.js");
 
 // models
-const { User } = require("./models/user.model.js");
-const { Blog } = require("./models/blog.model.js");
-const { Mail } = require("./models/mail.model.js");
+const { User } = require("../models/user.model.js");
+const { Blog } = require("../models/blog.model.js");
+const { Mail } = require("../models/mail.model.js");
 
 const db = require("../db.js");
 

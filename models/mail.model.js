@@ -3,11 +3,6 @@ const mongooseAggregatePaginate = require('mongoose-aggregate-paginate-v2');
 
 const mailSchema = mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      ref: "User",
-    },
     name: {
       type: String,
       required: true,
@@ -24,16 +19,27 @@ const mailSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    markAsRead: {
+    read: {
       type: Boolean,
       required: true,
       default: false,
     },
-    markAsSpam: {
+    spam: {
       type: Boolean,
       required: true,
       default: false
     },
+    starred: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    labels: [{
+      type: String,
+      required: true,
+      default: "none",
+      enum: ["none", "personal", "work", "important", "travel"]
+    }],
   },
   {
     timestamps: true,

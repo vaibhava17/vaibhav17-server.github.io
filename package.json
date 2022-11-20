@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "server for vaibhava17",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
     "start": "nodemon server.js",
-    "data:import": "node seeder",
-    "data:destroy": "node seeder -d"
+    "data:import": "node utils/seeder",
+    "data:destroy": "node utils/seeder -d"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "moment": "^2.29.4",
     "mongoose": "^6.7.2",
     "mongoose-aggregate-paginate-v2": "^1.0.6",
-    "nanoid": "^4.0.0"
+    "otp-generator": "^4.0.0",
+    "twilio": "^3.83.3"
   }
 }
