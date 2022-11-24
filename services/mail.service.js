@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { Mail } = require("../models/mail.model.js");
 
 // @desc  Send Mail
-// @route POST /api-v1/mails
+// @route POST /api-v1/mail
 // @access Public
 const sendMail = asyncHandler(async (req, res) => {
   const { name, email, mobile, message } = req.body;
@@ -44,10 +44,10 @@ const sendMail = asyncHandler(async (req, res) => {
 });
 
 // @desc  Get All Mails
-// @route GET /api-v1/mails
+// @route GET /api-v1/mail
 // @access Private
 const getAllMails = asyncHandler(async (req, res) => {
-  const { current, pageSize, sortField, sortOrder, search, type } = req.query;
+  const { current, pageSize, sortField, sortOrder, search } = req.query;
   let query = [
     {
       $match: {
@@ -61,7 +61,7 @@ const getAllMails = asyncHandler(async (req, res) => {
   ];
   const option = {
     page: parseInt(current, 10) || 1,
-    limit: noPaging == "true" ? 100000 : parseInt(pageSize, 10) || 10,
+    limit: parseInt(pageSize, 10) || 10,
     sort: { [sortField]: sortOrder },
   };
   return Mail.aggregatePaginate(Mail.aggregate(query), option).then((data) => {
@@ -76,13 +76,23 @@ const getAllMails = asyncHandler(async (req, res) => {
       hasNextPage: data.hasNextPage,
       prevPage: data.prevPage,
       nextPage: data.nextPage,
-      items: data.docs,
+      items: data.map((item) => {
+        return {
+          id: item._id,
+          name: item.name,
+          email: item.email,
+          mobile: item.mobile,
+          message: item.message,
+          spam: item.spam,
+          read: item.read,
+        };
+      }),
     });
   });
 });
 
 // @desc  Get Single Mail
-// @route GET /api-v1/mails/:id
+// @route GET /api-v1/mail/:id
 // @access Private
 const getSingleMail = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -96,12 +106,20 @@ const getSingleMail = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     message: "Mail fetched successfully",
-    mail,
+    data: {
+      id: mail._id,
+      name: mail.name,
+      email: mail.email,
+      mobile: mail.mobile,
+      message: mail.message,
+      spam: mail.spam,
+      read: mail.read,
+    },
   });
 });
 
 // @desc  mark as read
-// @route PUT /api-v1/mails/mark-as-read/:id
+// @route PUT /api-v1/mail/mark-as-read/:id
 // @access Private
 const markAsRead = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -121,7 +139,7 @@ const markAsRead = asyncHandler(async (req, res) => {
 });
 
 // @desc  mark as unread
-// @route PUT /api-v1/mails/mark-as-unread/:id
+// @route PUT /api-v1/mail/mark-as-unread/:id
 // @access Private
 const markAsUnread = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -141,7 +159,7 @@ const markAsUnread = asyncHandler(async (req, res) => {
 });
 
 // @desc  Delete Multiple Mails
-// @route DELETE /api-v1/mails
+// @route DELETE /api-v1/mail
 // @access Private
 const deleteMultipleMails = asyncHandler(async (req, res) => {
   const { ids } = req.body;
@@ -159,7 +177,7 @@ const deleteMultipleMails = asyncHandler(async (req, res) => {
 });
 
 // @desc  add to star
-// @route PUT /api-v1/mails/add-to-star/:id
+// @route PUT /api-v1/mail/add-to-star/:id
 // @access Private
 const addToStar = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -179,7 +197,7 @@ const addToStar = asyncHandler(async (req, res) => {
 });
 
 // @desc  remove from star
-// @route PUT /api-v1/mails/remove-from-star/:id
+// @route PUT /api-v1/mail/remove-from-star/:id
 // @access Private
 const removeFromStar = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -199,7 +217,7 @@ const removeFromStar = asyncHandler(async (req, res) => {
 });
 
 // @desc  add label
-// @route PUT /api-v1/mails/add-label/:id
+// @route PUT /api-v1/mail/add-label/:id
 // @access Private
 const addLabel = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -220,7 +238,7 @@ const addLabel = asyncHandler(async (req, res) => {
 });
 
 // @desc  remove label
-// @route PUT /api-v1/mails/remove-label/:id
+// @route PUT /api-v1/mail/remove-label/:id
 // @access Private
 const removeLabel = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -241,7 +259,7 @@ const removeLabel = asyncHandler(async (req, res) => {
 });
 
 // @desc  markAsSpam
-// @route PUT /api-v1/mails/mark-as-spam
+// @route PUT /api-v1/mail/mark-as-spam
 // @query email
 // @access Private
 const markAsSpam = asyncHandler(async (req, res) => {
@@ -264,7 +282,7 @@ const markAsSpam = asyncHandler(async (req, res) => {
 });
 
 // @desc  markAsNotSpam
-// @route PUT /api-v1/mails/mark-as-not-spam
+// @route PUT /api-v1/mail/mark-as-not-spam
 // @query email
 // @access Private
 const markAsNotSpam = asyncHandler(async (req, res) => {

@@ -11,6 +11,10 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    content: {
+      type: String,
+      required: true,
+    },
     image: {
       type: String,
       required: true,
@@ -24,12 +28,12 @@ const blogSchema = mongoose.Schema(
       type: Array,
       required: false,
     }, 
-    isPublished: {
+    published: {
       type: Boolean,
       required: true,
       default: false,
     },
-    isArchived: {
+    archived: {
       type: Boolean,
       required: true,
       default: false,
@@ -37,7 +41,7 @@ const blogSchema = mongoose.Schema(
     isDraft: {
       type: Boolean,
       required: true,
-      default: true,
+      default: false,
     },
     likes: {
       type: Number,

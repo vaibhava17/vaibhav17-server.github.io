@@ -17,10 +17,11 @@ const authorization = asyncHandler(async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded._id);
     next();
-  } catch (err) {
+  } catch (error) {
     return res.status(403).json({
       message: "You're not authorized",
-      success: false
+      success: false,
+      error
     });
   };
 });

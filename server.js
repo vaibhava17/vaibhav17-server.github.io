@@ -5,9 +5,8 @@ const cors = require('cors');
 const db = require("./db.js");
 const { notFound, errorHandler } = require("./middlewares/error.middleware.js");
 
-// Routes
-const userRoutes = require("./routes/user.routes.js");
-const mailRoutes = require("./routes/mail.routes.js");
+// V1 Routes
+const v1Routes = require("./routes/v1.routes.js");
 
 dotenv.config();
 db();
@@ -20,11 +19,8 @@ app.enable('trust proxy');
 app.options('*', cors());
 
 app.get("/", (req, res) => res.send("backend server running..."));
-
-app.use("/api-v1/user", userRoutes);
-app.use("/api-v1/mails", mailRoutes);
+app.use("/api-v1", v1Routes);
 app.use(notFound);
-
 app.use(errorHandler);
 
 const PORT = process.env.PORT;
