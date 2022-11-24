@@ -48,7 +48,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.createOTP = function () {
-  let OTPString = otpGenerator.generate(process.env.OPT_LENGTH, { upperCaseAlphabets: false, specialChars: false });
+  let OTPString = otpGenerator.generate(process.env.OTP_LENGTH, { upperCaseAlphabets: false, specialChars: false });
   this.otp = crypto.createHash('sha256').update(OTPString).digest('hex');
   this.otpExpires = moment().add(2, "minutes").format();
   return OTPString;

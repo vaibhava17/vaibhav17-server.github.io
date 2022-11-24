@@ -1,0 +1,32 @@
+name: Staging Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          remote_branch: "master"
+        env: 
+          HD_HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
+          HD_HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
+          HD_PORT: ${{secrets.PORT}}
+          HD_NODE_ENV: ${{secrets.NODE_ENV}}
+          HD_MONGO_URI: ${{secrets.MONGO_URI}}
+          HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
+          HD_SALT_ROUNDS: ${{secrets.SALT_ROUNDS}}
+          HD_OTP_CHARACTERS: ${{secrets.OTP_CHARACTERS}}
+          HD_OTP_LENGTH: ${{secrets.OTP_LENGTH}}
+          HD_TWILIO_ACCOUNT_SID: ${{secrets.TWILIO_ACCOUNT_SID}}
+          HD_TWILIO_AUTH_TOKEN: ${{secrets.TWILIO_AUTH_TOKEN}}
+          HD_TWILIO_PHONE_NUMBER: ${{secrets.TWILIO_PHONE_NUMBER}}
+          HD_GH_API_URL: ${{secrets.GH_API_URL}}

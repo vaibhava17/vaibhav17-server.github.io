@@ -8,7 +8,7 @@ const getRepoInfo = async (req, res, next) => {
     const githubURLArr = githubURL.split("/");
     const owner = githubURLArr[githubURLArr.length - 2];
     const repo = githubURLArr[githubURLArr.length - 1];
-    const RepoData = await axios.get(`${process.env.GITHUB_API_URL}/${owner}/${repo}`);
+    const RepoData = await axios.get(`${process.env.GH_API_URL}/${owner}/${repo}`);
     req.body.name = RepoData.data.name;
     req.body.description = RepoData.data.description;
     req.body.owner = RepoData.data.owner.login;
