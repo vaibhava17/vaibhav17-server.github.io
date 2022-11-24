@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev" : "nodemon server.js",
     "data:import": "node utils/seeder",
     "data:destroy": "node utils/seeder -d"
   },
