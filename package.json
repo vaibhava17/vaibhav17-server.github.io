@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
     "start": "node server.js",
-    "dev" : "nodemon server.js",
+    "dev": "nodemon server.js",
     "data:import": "node utils/seeder",
     "data:destroy": "node utils/seeder -d"
   },

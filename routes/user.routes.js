@@ -13,13 +13,13 @@ const { authorization } = require("../middlewares/auth.middleware.js");
 
 const router = express.Router();
 
+router.route("/").get(authorization, getUserProfile);
+router.route("/").put(authorization, updateProfile);
 router.route("/login").post(login);
-router.route("/auth").get(authorization, authantication);
-router.route("/otp/request").post(requestOTP);
-router.route("/reset-password").put(authorization, resetPassword);
-router.route("/profile").get(authorization, getUserProfile);
-router.route("/profile").put(authorization, updateProfile);
-router.route("/refresh-token").get(authorization, refreshToken);
+router.route("/auth").post(authorization, authantication);
+router.route("/otp").get(requestOTP);
+router.route("/reset").put(authorization, resetPassword);
+router.route("/token").get(authorization, refreshToken);
 
 
 module.exports = router;

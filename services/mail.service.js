@@ -176,10 +176,10 @@ const deleteMultipleMails = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc  add to star
-// @route PUT /api-v1/mail/add-to-star/:id
+// @desc  star mail
+// @route PUT /api-v1/mail/star-mail/:id
 // @access Private
-const addToStar = asyncHandler(async (req, res) => {
+const starMail = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
   const mail = await Mail.findById(mailId);
   if (!mail) {
@@ -188,40 +188,21 @@ const addToStar = asyncHandler(async (req, res) => {
       message: "No mail found",
     });
   }
-  mail.starred = true;
+  mail.starred = !mail.starred;
   await mail.save();
   res.status(200).json({
     success: true,
-    message: "Mail add to star",
+    message: "Star status changed",
+    id: mail._id,
   });
 });
 
-// @desc  remove from star
-// @route PUT /api-v1/mail/remove-from-star/:id
-// @access Private
-const removeFromStar = asyncHandler(async (req, res) => {
-  const mailId = req.params.id;
-  const mail = await Mail.findById(mailId);
-  if (!mail) {
-    return res.status(404).json({
-      success: false,
-      message: "No mail found",
-    });
-  }
-  mail.starred = false;
-  await mail.save();
-  res.status(200).json({
-    success: true,
-    message: "Mail remove from star",
-  });
-});
-
-// @desc  add label
+// @desc  add/remove label
 // @route PUT /api-v1/mail/add-label/:id
 // @access Private
-const addLabel = asyncHandler(async (req, res) => {
+const label = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
-  const { label } = req.body;
+  const { addLabels, removeLabels } = req.body;
   const mail = await Mail.findById(mailId);
   if (!mail) {
     return res.status(404).json({
@@ -229,20 +210,29 @@ const addLabel = asyncHandler(async (req, res) => {
       message: "No mail found",
     });
   }
-  mail.labels.push(label);
+  const filteredLabels = addLabels.filter((label) => {
+    return !mail.labels.includes(label);
+  });
+  mail.labels = [...mail.labels, ...filteredLabels];
+  if (removeLabels.length > 0) {
+    mail.labels = mail.labels.filter((label) => {
+      return !removeLabels.includes(label);
+    });
+  }
   await mail.save();
   res.status(200).json({
     success: true,
-    message: "Label added successfully",
+    message: "Label updated successfully.",
+    id: mail._id,
   });
 });
 
-// @desc  remove label
-// @route PUT /api-v1/mail/remove-label/:id
+// @desc  update spam status
+// @route PUT /api-v1/mail/spam/:id
+// @query email
 // @access Private
-const removeLabel = asyncHandler(async (req, res) => {
+const spamMail = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
-  const { label } = req.body;
   const mail = await Mail.findById(mailId);
   if (!mail) {
     return res.status(404).json({
@@ -250,74 +240,22 @@ const removeLabel = asyncHandler(async (req, res) => {
       message: "No mail found",
     });
   }
-  mail.labels = mail.labels.filter((item) => item !== label);
+  mail.spam = !mail.spam;
   await mail.save();
   res.status(200).json({
     success: true,
-    message: "Label removed successfully",
-  });
-});
-
-// @desc  markAsSpam
-// @route PUT /api-v1/mail/mark-as-spam
-// @query email
-// @access Private
-const markAsSpam = asyncHandler(async (req, res) => {
-  const { email } = req.query;
-  const allMails = await Mail.find({ email });
-  if(!allMails) {
-    return res.status(404).json({
-      success: false,
-      message: "No mail found",
-    });
-  }
-  allMails.forEach(async (item) => {
-    item.spam = true;
-    await item.save();
-  });
-  res.status(200).json({
-    success: true,
-    message: "Mail marked as spam",
-  });
-});
-
-// @desc  markAsNotSpam
-// @route PUT /api-v1/mail/mark-as-not-spam
-// @query email
-// @access Private
-const markAsNotSpam = asyncHandler(async (req, res) => {
-  const { email } = req.query;
-  const allMails = await Mail.find({
-    email,
-    spam: true,
-  });
-  if(!allMails) {
-    return res.status(404).json({
-      success: false,
-      message: "No mail found",
-    });
-  };
-  allMails.forEach(async (item) => {
-    item.spam = false;
-    await item.save();
-  });
-  res.status(200).json({
-    success: true,
-    message: "Mail marked as not spam",
+    message: "Mail spam status updated",
   });
 });
 
 module.exports = {
   sendMail,
   getAllMails,
+  deleteMultipleMails,
   getSingleMail,
+  label,
   markAsRead,
   markAsUnread,
-  deleteMultipleMails,
-  addToStar,
-  removeFromStar,
-  addLabel,
-  removeLabel,
-  markAsSpam,
-  markAsNotSpam,
+  starMail,
+  spamMail,
 };

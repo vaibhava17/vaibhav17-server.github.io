@@ -36,7 +36,7 @@ const login = asyncHandler(async (req, res) => {
 
 
 // @desc    Two Factor Authantication
-// @route   GET /api-v1/user/auth
+// @route   POST /api-v1/user/auth
 // @access  Private
 const authantication = asyncHandler(async (req, res) => {
   const hashedToken = crypto.createHash("sha256").update(req.body.otp).digest("hex");
@@ -46,7 +46,7 @@ const authantication = asyncHandler(async (req, res) => {
     otpExpires: { $gt: moment().format() },
   });
   if (!user) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "OTP is invalid or expired. Please try again.",
     });
@@ -56,9 +56,9 @@ const authantication = asyncHandler(async (req, res) => {
   await user.save({ validateBeforeSave: false });
   res.status(200).json({
     success: true,
-    message: "OTP verified successfully",
+    message: "OTP verified successfully.",
     token: generateToken(user),
-    user: {
+    data: {
       name: user.name,
       email: user.email,
       mobile: user.mobile,
@@ -68,7 +68,7 @@ const authantication = asyncHandler(async (req, res) => {
 });
 
 // @desc    Request for OTP
-// @route   POST /api-v1/user/otp/request
+// @route   GET /api-v1/user/otp
 // @access  Public
 const requestOTP = asyncHandler(async (req, res) => {
   const { mobile } = req.body;
@@ -82,7 +82,7 @@ const requestOTP = asyncHandler(async (req, res) => {
     mobile,
   });
   if (!user) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "Mobile number not registered.",
     });
@@ -100,7 +100,7 @@ const requestOTP = asyncHandler(async (req, res) => {
 
 
 // @desc    Reset Password
-// @route   PUT /api-v1/user/reset-password
+// @route   PUT /api-v1/user/reset
 // @access  Private
 const resetPassword = asyncHandler(async (req, res) => {
   const password = req.body.password
@@ -117,7 +117,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     otpExpires: { $gt: moment().format() },
   });
   if (!user) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "OTP is invalid or expired. Please try again.",
     });
@@ -128,12 +128,12 @@ const resetPassword = asyncHandler(async (req, res) => {
   await user.save({ validateBeforeSave: false });
   res.status(200).json({
     success: true,
-    message: "Password reset successfully. Please login again.",
+    message: "Password reset successfully. Please login.",
   });
 });
 
 // @desc   Get user profile
-// @route  GET /api-v1/user/profile
+// @route  GET /api-v1/user
 // @access private
 const getUserProfile = asyncHandler(async (req, res) => {
   const userId = req.user._id;
@@ -147,6 +147,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     message: "User profile fetched successfully.",
+    token: generateToken(user),
     data: {
       name: user.name,
       email: user.email,
@@ -157,7 +158,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 // @desc    update user profile
-// @route   PUT /api/users/profile
+// @route   PUT /api/user
 // @access  Private
 const updateProfile = asyncHandler(async (req, res) => {
   const userId = req.user._id;
@@ -172,7 +173,7 @@ const updateProfile = asyncHandler(async (req, res) => {
   const updatedUser = await user.save();
   res.status(200).json({
     success: true,
-    message: "User profile updated.",
+    message: "User profile updated successfully.",
     token: generateToken(updatedUser),
     data: {
       name: updatedUser.name,
@@ -184,7 +185,7 @@ const updateProfile = asyncHandler(async (req, res) => {
 });
 
 // @desc refresh token
-// @route GET /api-v1/user/refresh-token
+// @route GET /api-v1/user/token
 // @access Private
 const refreshToken = asyncHandler(async (req, res) => {
   const userId = req.user._id;
@@ -197,7 +198,7 @@ const refreshToken = asyncHandler(async (req, res) => {
   }
   res.status(200).json({
     success: true,
-    message: "Token refreshed successfully.",
+    message: "New token generated successfully.",
     token: generateToken(user),
   });
 });

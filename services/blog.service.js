@@ -2,10 +2,11 @@ const asyncHandler = require("express-async-handler");
 const { Blog } = require("../models/blog.model.js");
 
 // @desc  add Blog
-// @route POST /api-v1/blog
+// @route POST /api-v1/blog?type="draft"
 // @access Private
 const createBlog = asyncHandler(async (req, res) => {
-  const { title, description, image, content, type } = req.body;
+  const { type } = req.params
+  const { title, description, image, content } = req.body;
   if (!title || !description || !image || !content) {
     res.status(400).json({ message: "Please fill all the fields", success: false });
   }

@@ -1,0 +1,232 @@
+/*
+* Table of Contents
+* 1.0 - Reset
+* 2.0 - Footer
+* 3.0 - Navigation
+* 4.0 - Layout
+* 5.0 - Forms
+* 6.0 - Buttons
+* 7.0 - Misc
+* 8.0 - Media Queries
+* 9.0 - Typography
+*/
+
+/* 1.0 - Reset */
+:root {
+  --default-bg-color: #0d1117;
+  --overlay-bg-color: #161b22;
+  --default-text-color: #c9d1d9;
+  --muted-text-color: #8b949e;
+  --link-color: #58a6ff;
+  --white-color: #fff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Anonymous Pro', monospace;
+  scroll-behavior: smooth;
+}
+
+/* design scoll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #FFF;
+  background-image: -webkit-gradient(linear,
+      40% 0%,
+      75% 84%,
+      to(var(--default-text-color)),
+      from(var(--muted-text-color)), )
+}
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */
+
+body {
+  background-color: var(--default-bg-color);
+  color: var(--default-text-color);
+}
+
+/* 2.0 Footer */
+footer {
+  font-size: small !important;
+  background-color: var(--overlay-bg-color);
+  color: var(--muted-text-color);
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.action-icon {
+  color: var(--muted-text-color);
+}
+
+.action-icon:hover {
+  color: var(--link-color);
+}
+
+.border-muted-color {
+  border-color: var(--muted-text-color) !important;
+}
+
+.icon-width {
+  width: 46.7px;
+  height: 46.7px;
+}
+
+/* 3.0 Navigation */
+
+nav {
+  font-size: small !important;
+  background-color: var(--default-bg-color);
+  color: var(--default-text-color);
+  /* position: fixed; */
+  /* top: 0; */
+  width: 100%;
+  z-index: 1;
+  border-bottom: var(--muted-text-color) 1px solid;
+}
+
+nav ul {
+  list-style-type: none;
+  overflow: hidden;
+}
+
+nav li {
+  width: 140px;
+  text-align: center;
+  padding: 7px;
+}
+
+
+nav li.active {
+  background-color: var(--overlay-bg-color);
+  border-bottom: var(--default-text-color) 2px solid;
+  color: var(--muted-text-color);
+}
+
+.action-button {
+  color: var(--default-text-color);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.action-button:hover {
+  color: var(--link-color);
+}
+
+.action-button.active {
+  color: var(--white-color);
+}
+
+.small {
+  font-size: smaller;
+}
+
+/* 4.0 Home Section */
+section {
+  height: 88vh;
+}
+
+section h1 {
+  font-size: 3rem;
+}
+
+section h4 {
+  font-size: 1.2rem;
+  color: rgb(255, 162, 0);
+}
+
+section p {
+  font-size: .8rem;
+}
+
+section p a {
+  color: var(--link-color);
+}
+
+section p a:hover {
+  color: var(--default-text-color);
+}
+
+/* 5.0 API Doc Section*/
+.overflow-container {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.overflow-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.clipborad {
+  background-color: var(--overlay-bg-color);
+  color: var(--default-text-color);
+  border: var(--muted-text-color) 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 10px;
+  padding: 10px;
+}
+
+.clipborad p {
+  margin: 0;
+  padding: 0;
+}
+
+.clipborad p a {
+  color: var(--link-color);
+}
+
+.clipborad p a:hover {
+  color: var(--default-text-color);
+}
+
+.clipborad .copy-button {
+  background: none;
+  border: none;
+  font-size: 0;
+}
+
+.clipborad:hover>.copy-button {
+  background: none;
+  color: var(--default-text-color);
+  border: var(--muted-text-color) 1px solid;
+  cursor: pointer;
+  height: fit-content;
+  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+  text-decoration: none;
+  font-size: .8rem;
+}
+
+.clipborad .copy-button:hover {
+  color: var(--link-color);
+}
+
+.sticky-label {
+  position: sticky;
+  top: 0;
+  background-color: var(--default-bg-color);
+  z-index: 1;
+}
+
+.sticky-sub-label {
+  position: sticky;
+  top: 26px;
+  background-color: var(--default-bg-color);
+  padding-bottom: 10px;
+}

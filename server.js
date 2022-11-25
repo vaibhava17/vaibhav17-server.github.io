@@ -18,7 +18,9 @@ app.use(express.json());
 app.enable('trust proxy');
 app.options('*', cors());
 
-app.get("/", (req, res) => res.send("backend server running..."));
+app.get("/", (req, res) => res.sendFile('public/index.html', {root: __dirname }));
+app.get("/api-docs", (req, res) => res.sendFile('public/api.html', {root: __dirname }));
+app.use(express.static(__dirname + '/public'));
 app.use("/api-v1", v1Routes);
 app.use(notFound);
 app.use(errorHandler);
