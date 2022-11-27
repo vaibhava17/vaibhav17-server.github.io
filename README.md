@@ -104,7 +104,7 @@ Of course, no one will serve all projects since your needs may be different. So 
   ```
 * [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) Account for database
 
-* This app has 2-Factor Authentication using [Twilio](https://www.twilio.com/). So you need to create a twilio account and get the credentials. You can also use [Nexmo](https://www.nexmo.com/) for 2FA or just change the code in `services\user.server.js` to login.
+* This app has 2-Factor Authentication using [Twilio](https://www.twilio.com/). So you need to create a twilio account and get the credentials. You can also use [Nexmo](https://www.nexmo.com/) for 2FA or just change the code in `services\user.service.js` for login function.
 
 ### Optional prerequisites
 
@@ -150,7 +150,7 @@ To get a local copy up and running follow these simple steps.
     ```
     npm run dev
     ```
-5. Open [http://localhost:3030](http://localhost:3030) with your browser to see the result.
+5. Open `http://localhost:3030` with your browser to see the result.
 6. You can also use the dummy data in to test the server.
     ```
     npm run data:import
@@ -158,7 +158,7 @@ To get a local copy up and running follow these simple steps.
     ```
     npm run data:destroy
     ```
-  _Check `TODO` comments in `data\user.data.js` for before running these commands._
+  _Check `TODO` comments in `data\user.data.js` before running these dummy data commands._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -188,7 +188,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
 See the [open issues](https://github.com/vaibhava17/vaibhav17-server.github.io/issues) for a full list of proposed features (and known issues).
 
 
@@ -205,12 +204,22 @@ Distributed under the MIT License. See [LICENSE](https://github.com/vaibhava17/v
 ## Contact
 
 <samp>
-    <a href="https://twitter.com/_vaibhava__" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="_vaibhava__" height="30" width="40" /></a> . 
-    <a href="https://www.linkedin.com/in/vaibhava17/" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="vaibhav98a" height="30" width="40" /></a> . 
-    <a href="https://dev.to/vaibhava17" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/devto.svg" alt="vaibhava17" height="30" width="40" /></a>
-  </samp>
+  <a href="https://twitter.com/_vaibhava__" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="_vaibhava__" height="30" width="40" /></a> . 
+  <a href="https://www.linkedin.com/in/vaibhava17/" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="vaibhav98a" height="30" width="40" /></a> . 
+  <a href="https://dev.to/vaibhava17" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/devto.svg" alt="vaibhava17" height="30" width="40" /></a>
+</samp>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<br/>
+
+<div align="center" style="font-weight: bold">
+
+Made with ❤️ by [Vaibhav](https://vaibhava17.github.io)
+
+</div>
+
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -225,5 +234,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/vaibhava17/v
 [license-shield]: https://img.shields.io/github/license/vaibhava17/vaibhav17-server.github.io.svg?style=for-the-badge
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vaibhava17
-
-[express]: https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/BackendDevelopment/express.svg-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
