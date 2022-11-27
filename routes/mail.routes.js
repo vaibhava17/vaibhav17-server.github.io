@@ -20,9 +20,9 @@ router.route("/").get(authorization, getAllMails);
 router.route("/").delete(authorization, deleteMultipleMails);
 router.route("/:id").get(authorization, getSingleMail);
 router.route("/:id").put(authorization, label);
-router.route("/mark-as-read/:id").put(authorization, markAsRead);
-router.route("/mark-as-unread/:id").put(authorization, markAsUnread);
-router.route("/star-mail/:id").put(authorization, starMail);
+router.route("/read/:id").put(authorization, markAsRead);
+router.route("/unread/:id").put(authorization, markAsUnread);
+router.route("/star/:id").put(authorization, starMail);
 router.route("/spam/:id").put(authorization, spamMail);
 
 module.exports = router;

@@ -32,12 +32,12 @@ const sendMail = asyncHandler(async (req, res) => {
     });
   }
   if (mail) {
-    return res.status(200).json({
+    return res.status(201).json({
       success: true,
       message: "Thank you for contacting us. We will get back to you soon.",
     });
   }
-  res.status(400).json({
+  res.status(401).json({
     success: false,
     message: "Sorry! We can not send your message. Please try again.",
   });
@@ -67,15 +67,10 @@ const getAllMails = asyncHandler(async (req, res) => {
   return Mail.aggregatePaginate(Mail.aggregate(query), option).then((data) => {
     res.status(200).json({
       success: true,
-      message: "All the messages are fetched successfully.",
+      message: "mails list.",
       total: data.totalDocs,
       pageSize: data.limit,
-      totalPages: data.totalPages,
       current: data.page,
-      hasPrevPage: data.hasPrevPage,
-      hasNextPage: data.hasNextPage,
-      prevPage: data.prevPage,
-      nextPage: data.nextPage,
       items: data.map((item) => {
         return {
           id: item._id,
@@ -105,7 +100,7 @@ const getSingleMail = asyncHandler(async (req, res) => {
   }
   res.status(200).json({
     success: true,
-    message: "Mail fetched successfully",
+    message: "Mail data fetched successfully",
     data: {
       id: mail._id,
       name: mail.name,
@@ -119,7 +114,7 @@ const getSingleMail = asyncHandler(async (req, res) => {
 });
 
 // @desc  mark as read
-// @route PUT /api-v1/mail/mark-as-read/:id
+// @route PUT /api-v1/mail/read/:id
 // @access Private
 const markAsRead = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -127,19 +122,19 @@ const markAsRead = asyncHandler(async (req, res) => {
   if (!mail) {
     return res.status(404).json({
       success: false,
-      message: "No mail found",
+      message: "No mail found.",
     });
   }
   mail.read = true;
   await mail.save();
   res.status(200).json({
     success: true,
-    message: "Mail marked as read",
+    message: "Mail marked as read.",
   });
 });
 
 // @desc  mark as unread
-// @route PUT /api-v1/mail/mark-as-unread/:id
+// @route PUT /api-v1/mail/unread/:id
 // @access Private
 const markAsUnread = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -166,18 +161,18 @@ const deleteMultipleMails = asyncHandler(async (req, res) => {
   if (!ids) {
     return res.status(400).json({
       success: false,
-      message: "Please provide ids",
+      message: "Provide atleast one mail id",
     });
   }
   await Mail.deleteMany({ _id: { $in: ids } });
   res.status(200).json({
     success: true,
-    message: "Mails deleted successfully",
+    message: "Mails removed successfully",
   });
 });
 
 // @desc  star mail
-// @route PUT /api-v1/mail/star-mail/:id
+// @route PUT /api-v1/mail/star/:id
 // @access Private
 const starMail = asyncHandler(async (req, res) => {
   const mailId = req.params.id;
@@ -210,11 +205,17 @@ const label = asyncHandler(async (req, res) => {
       message: "No mail found",
     });
   }
+  if(addLabels && addLabels.length == 0) {
+    return res.status(400).json({
+      success: false,
+      message: "Provide atleast one label to add.",
+    });
+  }
   const filteredLabels = addLabels.filter((label) => {
     return !mail.labels.includes(label);
   });
   mail.labels = [...mail.labels, ...filteredLabels];
-  if (removeLabels.length > 0) {
+  if (removeLabels && removeLabels.length > 0) {
     mail.labels = mail.labels.filter((label) => {
       return !removeLabels.includes(label);
     });
@@ -222,7 +223,7 @@ const label = asyncHandler(async (req, res) => {
   await mail.save();
   res.status(200).json({
     success: true,
-    message: "Label updated successfully.",
+    message: "Labels updated successfully.",
     id: mail._id,
   });
 });

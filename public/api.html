@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta description="A simple example of a static website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="img/logo.svg" />
+    <title>API documentation</title>
+    <link rel="stylesheet" href="css/bootstrap-v5.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Kanit&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <ul class="d-flex flex-row m-0 p-0">
+        <li><a href="/" class="action-button">_hello</a></li>
+        <li class="active">
+          <a href="/api-docs" class="action-button">_api</a>
+        </li>
+      </ul>
+    </nav>
+    <section
+      class="container row mx-auto align-items-center justify-content-between gx-4"
+    >
+      <div class="d-flex flex-column col-md-4 col-10">
+        <h3>API documentation</h3>
+        <!-- Table of content -->
+        <div class="d-flex flex-column">
+          <h4>Table of content</h4>
+          <ul class="d-flex flex-column list-unstyled">
+            <li>
+              <a href="#user" class="action-button" id="userbtn">USER</a>
+              <ul class="ms-2 list-unstyled show" id="user-list">
+                <li>
+                  <a href="#login" class="action-button small">POST login</a>
+                </li>
+                <li>
+                  <a href="#auth" class="action-button small">POST 2fa</a>
+                </li>
+                <li>
+                  <a href="#otp" class="action-button small">GET otp</a>
+                </li>
+                <li>
+                  <a href="#reset" class="action-button small">
+                    PUT reset password
+                  </a>
+                </li>
+                <li>
+                  <a href="#me" class="action-button small">GET profile</a>
+                </li>
+                <li>
+                  <a href="#update" class="action-button small">
+                    PUT update user
+                  </a>
+                </li>
+                <li>
+                  <a href="#token" class="action-button small">
+                    GET refresh token
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#blogs" class="action-button" id="blogsbtn">BLOGS</a>
+              <ul class="ms-2 list-unstyled show hidden" id="blog-list">
+                <li>
+                  <a href="#create-blog" class="action-button small">
+                    POST create blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#blogs-list" class="action-button small">
+                    GET blogs list
+                  </a>
+                </li>
+                <li>
+                  <a href="#delete-blogs" class="action-button small">
+                    DELETE blogs
+                  </a>
+                </li>
+                <li>
+                  <a href="#one-blog" class="action-button small"> GET blog </a>
+                </li>
+                <li>
+                  <a href="#update-blog" class="action-button small">
+                    PUT update blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#like" class="action-button small">
+                    PUT like blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#publish" class="action-button small">
+                    PUT publish blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#archive" class="action-button small">
+                    PUT archive blog
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#projects" class="action-button" id="projectsbtn">PROJECTS</a>
+              <ul class="ms-2 list-unstyled show hidden" id="project-list">
+                <li>
+                  <a href="#create-project" class="action-button small">
+                    POST create project
+                  </a>
+                </li>
+                <li>
+                  <a href="#projects-list" class="action-button small">
+                    GET projects list
+                  </a>
+                </li>
+                <li>
+                  <a href="#delete-projects" class="action-button small">
+                    DELETE projects
+                  </a>
+                </li>
+                <li>
+                  <a href="#one-project" class="action-button small">
+                    GET project
+                  </a>
+                </li>
+                <li>
+                  <a href="#update-project" class="action-button small">
+                    PUT update project
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#mails" class="action-button" id="mailsbtn">MAILS</a>
+              <ul class="ms-2 list-unstyled show hidden" id="mail-list">
+                <li>
+                  <a href="#add-mail" class="action-button small">
+                    POST add mail
+                  </a>
+                </li>
+                <li>
+                  <a href="#mails-list" class="action-button small">
+                    GET mails list
+                  </a>
+                </li>
+                <li>
+                  <a href="#delete-mails" class="action-button small">
+                    DELETE mails
+                  </a>
+                </li>
+                <li>
+                  <a href="#one-mail" class="action-button small"> GET mail </a>
+                </li>
+                <li>
+                  <a href="#read" class="action-button small">
+                    PUT read mail
+                  </a>
+                </li>
+                <li>
+                  <a href="#unread" class="action-button small">
+                    PUT unread mail
+                  </a>
+                </li>
+                <li>
+                  <a href="#star" class="action-button small">
+                    PUT add/remove star
+                  </a>
+                </li>
+                <li>
+                  <a href="#label" class="action-button small">
+                    PUT add/remove label
+                  </a>
+                </li>
+                <li>
+                  <a href="#mail-spam" class="action-button small">
+                    PUT add/remove spam
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-flex flex-column col-md-7 col-10">
+        <h3>API endpoints</h3>
+        <div class="overflow-container">
+          <div id="user" class="position-relative">
+            <h4 class="sticky-label">User</h4>
+            <!-- #login  -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="login">
+                POST <span class="text-light">/api-v1/user/login</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  email <span class="text-light">string</span>
+                  <span class="yellow">reqiured</span>
+                </p>
+                <p class="text-muted">
+                  password <span class="text-light">string</span>
+                  <span class="yellow">reqiured</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "OTP sent to your mobile number.",<br />
+                    &nbsp;&nbsp;"token": "token"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please provide email or
+                    password."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "OTP sent to your mobile number."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #auth -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="auth">
+                POST <span class="text-light">/api-v1/user/auth</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  otp <span class="text-light">number</span>
+                  <span class="yellow">reqiured</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "OTP verified successfully.",<br />
+                    &nbsp;&nbsp;"token": "token",<br />
+                    &nbsp;&nbsp;"data": {user data},<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please provide OTP"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "OTP is invalid or expired. Please
+                    try again."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #otp -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="otp">
+                GET <span class="text-light">/api-v1/user/otp</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  mobile <span class="text-light">number</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "OTP sent to your mobile number.",<br />
+                    &nbsp;&nbsp;"token": "token"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please provide mobile number."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Mobile number not registered."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #reset -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="reset">
+                PUT <span class="text-light">/api-v1/user/reset</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  password <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  otp <span class="text-light">number</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Password reset successfully. Please
+                    login."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light"> Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please provide password."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "OTP is invalid or expired. Please
+                    try again."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #me -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="me">
+                GET <span class="text-light">/api-v1/user</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "OTP verified successfully.",<br />
+                    &nbsp;&nbsp;"token": "token",<br />
+                    &nbsp;&nbsp;"data": {user data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "User not found. Please try
+                    again."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #update -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="update">
+                PUT <span class="text-light">/api-v1/user</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  name <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  mobile <span class="text-light">number</span>
+                </p>
+                <p class="text-muted">
+                  email <span class="text-light">string</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "User profile updated
+                    successfully.",<br />
+                    &nbsp;&nbsp;"token": "token",<br />
+                    &nbsp;&nbsp;"data": {user data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "User not found. Please try
+                    again."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- token -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="token">
+                GET <span class="text-light">/api-v1/user/token</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "New token generated
+                    successfully.",<br />
+                    &nbsp;&nbsp;"token": "token"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "User not found. Please try
+                    again."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="blogs" class="position-relative">
+            <h4 class="sticky-label">Blogs</h4>
+            <!-- #create-blog  -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="create-blog">
+                POST <span class="text-light">/api-v1/blog</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  type
+                  <span class="text-light">string</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  title <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  description <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  image <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  content <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">
+                  201 <span class="text-light">Created</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blog created successfully",<br />
+                    &nbsp;&nbsp;"id": "blog id"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please fill all the fields."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Something went wrong."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #blogs-list -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="blogs-list">
+                GET <span class="text-light">/api-v1/blog</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  current
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  pageSize
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  sortField
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  sortOrder
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  search
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  type
+                  <span class="text-light">string</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "blogs list",<br />
+                    &nbsp;&nbsp;"total": 1,<br />
+                    &nbsp;&nbsp;"pageSize: 10,<br />
+                    &nbsp;&nbsp;"current": 1,<br />
+                    &nbsp;&nbsp;"items": [list items],<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #delete-blogs -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="delete-blogs">
+                DELETE <span class="text-light">/api-v1/blog</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  ids <span class="text-light">array</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blogs removed successfully."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Provide atleast one blog id"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #one-blog -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="one-blog">
+                GET <span class="text-light">/api-v1/blog/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blog data fetched successfully.",<br />
+                    &nbsp;&nbsp;"data": {blog data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light"> Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Blog not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #update-blog -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="update-blog">
+                PUT <span class="text-light">/api-v1/blog/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  title <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  description <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  image <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  content <span class="text-light">string</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blog updated successfully.",<br />
+                    &nbsp;&nbsp;"data": {blog data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Blog not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #like -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="like">
+                PUT <span class="text-light">/api-v1/blog/like/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blog liked successfully.",<br />
+                    &nbsp;&nbsp;"data": {blog data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Blog not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- publish -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="publish">
+                PUT <span class="text-light">/api-v1/blog/publish/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blog published successfully.",<br />
+                    &nbsp;&nbsp;"data": {blog data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Blog not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- archive -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="archive">
+                PUT <span class="text-light">/api-v1/blog/archive/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Blog archived successfully.",<br />
+                    &nbsp;&nbsp;"data": {blog data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Blog not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="projects" class="position-relative">
+            <h4 class="sticky-label">Projects</h4>
+            <!-- #create-project  -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="create-project">
+                POST <span class="text-light">/api-v1/project</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  githubURL <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  webURL <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  images <span class="text-light">array</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">
+                  201 <span class="text-light">Created</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Project added successfully",<br />
+                    &nbsp;&nbsp;"id": "project id"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please fill all the fields."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Something went wrong.",<br />
+                    &nbsp;&nbsp;"error": {error message}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #projects-list -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="projects-list">
+                GET <span class="text-light">/api-v1/project</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  current
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  pageSize
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  sortField
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  sortOrder
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  search
+                  <span class="text-light">string</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "projects list",<br />
+                    &nbsp;&nbsp;"total": 1,<br />
+                    &nbsp;&nbsp;"pageSize: 10,<br />
+                    &nbsp;&nbsp;"current": 1,<br />
+                    &nbsp;&nbsp;"items": [list items],<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #delete-projects -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="delete-projects">
+                DELETE <span class="text-light">/api-v1/project</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  ids <span class="text-light">array</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "projects removed successfully."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Provide atleast one project id"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #one-project -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="one-project">
+                GET <span class="text-light">/api-v1/project/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Project data fetched successfully.",<br />
+                    &nbsp;&nbsp;"data": {Project data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light"> Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Project not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #update-project -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="update-project">
+                PUT <span class="text-light">/api-v1/project/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  githubURL <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  webURL <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  images <span class="text-light">array</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Project updated successfully.",<br />
+                    &nbsp;&nbsp;"data": {Project data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Project not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="mails" class="position-relative">
+            <h4 class="sticky-label">Mails</h4>
+            <!-- #add-mail  -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="add-mail">
+                POST <span class="text-light">/api-v1/mail</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  name <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  mobile <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  email <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  message <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">
+                  201 <span class="text-light">Created</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Thank you for contacting us. we will get back to you soon."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Please fill all the fields."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "You have been marked as spam."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  401 <span class="text-light">Unauthorized</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Sorry! We can not send your message. Please try again."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #mails-list -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="mails-list">
+                GET <span class="text-light">/api-v1/mail</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer <span class="text-light">token</span>
+                  <span class="yellow">reqiured</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  current
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  pageSize
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  sortField
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  sortOrder
+                  <span class="text-light">string</span>
+                </p>
+                <p class="text-muted">
+                  search
+                  <span class="text-light">string</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "mails list",<br />
+                    &nbsp;&nbsp;"total": 1,<br />
+                    &nbsp;&nbsp;"pageSize: 10,<br />
+                    &nbsp;&nbsp;"current": 1,<br />
+                    &nbsp;&nbsp;"items": [list items],<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #delete-mails -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="delete-mails">
+                DELETE <span class="text-light">/api-v1/mail</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  ids <span class="text-light">array</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "mails removed successfully."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Provide atleast one mail id"<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #one-mail -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="one-mail">
+                GET <span class="text-light">/api-v1/mail/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span>
+                  <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Mail data fetched successfully.",<br />
+                    &nbsp;&nbsp;"data": {Mail data}<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light"> Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Mail not found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #read -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="read">
+                PUT <span class="text-light">/api-v1/mail/read/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Mail marked as read."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "No mail found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #unread -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="unread">
+                PUT <span class="text-light">/api-v1/mail/unread/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Mail marked as unread."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "No mail found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #star -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="star">
+                PUT <span class="text-light">/api-v1/mail/star/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Mail starred successfully."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "No mail found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #label -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="label">
+                PUT <span class="text-light">/api-v1/mail/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Body parameters</h6>
+                <p class="text-muted">
+                  addLabels <span class="text-light">array</span> <span class="yellow">required</span>
+                </p>
+                <p class="text-muted">
+                  removeLabels <span class="text-light">array</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Labels update successfully."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  400 <span class="text-light">Bad Request</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "Provide atleast one label to add."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "No mail found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- #spam -->
+            <div class="border-bottom border-muted-color mb-2">
+              <p class="text-muted sticky-sub-label" id="mail-spam">
+                PUT <span class="text-light">/api-v1/mail/spam/:id</span>
+              </p>
+              <h5 class="mt-3">Parameters</h5>
+              <div>
+                <h6 class="mt-3">Headers</h6>
+                <p class="text-muted">
+                  Content-Type: application/json
+                  <span class="text-light">recommended</span>
+                </p>
+                <p class="text-muted">
+                  authorization: Bearer token
+                  <span class="yellow">required</span>
+                </p>
+                <h6 class="mt-3">Path parameters</h6>
+                <p class="text-muted">
+                  id <span class="text-light">string</span> <span class="yellow">required</span>
+                </p>
+              </div>
+              <h5 class="mt-3">HTTP Response status codes</h5>
+              <div>
+                <h6 class="mt-3">Status</h6>
+                <p class="text-muted">200 <span class="text-light">OK</span></p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": true,<br />
+                    &nbsp;&nbsp;"message": "Mail marked as spam."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <p class="text-muted">
+                  404 <span class="text-light">Not Found</span>
+                </p>
+                <div class="clipborad">
+                  <p class="text-muted">
+                    {<br />
+                    &nbsp;&nbsp;"success": false,<br />
+                    &nbsp;&nbsp;"message": "No mail found."<br />
+                    }
+                  </p>
+                  <button class="copy-button">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="border-top border-muted-color">
+      <div class="row px-3">
+        <div class="col-6 d-flex flex-row">
+          <div class="pe-3 py-2 border-end border-muted-color">
+            <p class="text-start m-0">find me on:</p>
+          </div>
+          <a href="https://linkedin.com/in/vaibhava17" target="_blank">
+            <div class="border-end border-muted-color py-2 icon-width">
+              <i class="fab fa-linkedin-in action-icon"></i>
+            </div>
+          </a>
+          <a href="https://github.com/vaibhava17" target="_blank">
+            <div class="border-end border-muted-color py-2 icon-width">
+              <i class="fab fa-github action-icon"></i>
+            </div>
+          </a>
+          <a href="https://twitter.com/_vaibhava__" target="_blank">
+            <div class="border-end border-muted-color py-2 icon-width">
+              <i class="fab fa-twitter action-icon"></i>
+            </div>
+          </a>
+        </div>
+        <div class="col-6">
+          <p class="text-end m-0 py-2">Made with ❤️ by Vaibhav</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script
+    src="https://kit.fontawesome.com/e4d654b15a.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="js/bootstrap-v5.js"></script>
+  <script src="js/script.js"></script>
+</html>

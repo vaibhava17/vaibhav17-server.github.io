@@ -9,7 +9,6 @@ const {
   likeBlog,
   publishBlog,
   archiveBlog,
-  unarchiveBlog,
 } = require("../services/blog.service.js");
 const { authorization } = require("../middlewares/auth.middleware.js");
 
@@ -23,6 +22,5 @@ router.route("/:id").put(authorization, updateBlog);
 router.route("/like/:id").put(likeBlog);
 router.route("/publish/:id").put(authorization, publishBlog);
 router.route("/archive/:id").put(authorization, archiveBlog);
-router.route("/unarchive/:id").put(authorization, unarchiveBlog);
 
 module.exports = router;

@@ -19,6 +19,7 @@
   --muted-text-color: #8b949e;
   --link-color: #58a6ff;
   --white-color: #fff;
+  --yellow-color: rgb(255, 162, 0);
 }
 
 * {
@@ -142,7 +143,7 @@ section h1 {
 
 section h4 {
   font-size: 1.2rem;
-  color: rgb(255, 162, 0);
+  color: var(--yellow-color);
 }
 
 section p {
@@ -219,14 +220,29 @@ section p a:hover {
 
 .sticky-label {
   position: sticky;
-  top: 0;
+  top: -2px;
   background-color: var(--default-bg-color);
   z-index: 1;
 }
 
 .sticky-sub-label {
   position: sticky;
-  top: 26px;
+  top: 25px;
   background-color: var(--default-bg-color);
   padding-bottom: 10px;
+}
+
+.yellow {
+  color: var(--yellow-color);
+}
+
+.show {
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+  transition: max-height 0.2s ease-in;
+}
+.hidden {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }

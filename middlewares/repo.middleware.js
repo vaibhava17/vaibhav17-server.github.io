@@ -15,7 +15,7 @@ const getRepoInfo = async (req, res, next) => {
     req.body.publishedAt = RepoData.data.created_at;
     next();
   } catch (error) {
-    return res.status(400).json({ message: "Invalid Github URL", success: false, error });
+    return res.status(401).json({ message: "Something went wrong.", success: false, error });
   }
 };
 

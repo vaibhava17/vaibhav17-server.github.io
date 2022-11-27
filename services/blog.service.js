@@ -8,7 +8,7 @@ const createBlog = asyncHandler(async (req, res) => {
   const { type } = req.params
   const { title, description, image, content } = req.body;
   if (!title || !description || !image || !content) {
-    res.status(400).json({ message: "Please fill all the fields", success: false });
+    res.status(400).json({ message: "Please fill all the fields.", success: false });
   }
   let values = {
     title,
@@ -26,10 +26,10 @@ const createBlog = asyncHandler(async (req, res) => {
     res.status(201).json({
       id: blog._id,
       success: true,
-      message: blog.isDraft ? "Draft saved" : "Blog added successfully",
+      message: blog.isDraft ? "Draft saved" : "Blog created successfully",
     });
   } else {
-    res.status(400).json({ message: "Something went wrong.", success: false });
+    res.status(401).json({ message: "Something went wrong.", success: false });
   }
 });
 
@@ -65,15 +65,10 @@ const getBlogs = asyncHandler(async (req, res) => {
   return Mail.aggregatePaginate(Mail.aggregate(query), option).then((data) => {
     res.status(200).json({
       success: true,
-      message: "All the messages are fetched successfully.",
+      message: "blogs list",
       total: data.totalDocs,
       pageSize: data.limit,
-      totalPages: data.totalPages,
       current: data.page,
-      hasPrevPage: data.hasPrevPage,
-      hasNextPage: data.hasNextPage,
-      prevPage: data.prevPage,
-      nextPage: data.nextPage,
       items: data.docs.map((item) => {
         return {
           id: item._id,
@@ -95,7 +90,7 @@ const getSingleBlog = asyncHandler(async (req, res) => {
   if (blog) {
     res.status(200).json({
       success: true,
-      message: "Blog fetched successfully.",
+      message: "Blog data fetched successfully.",
       date: {
         id: blog._id,
         title: blog.title,
@@ -106,7 +101,7 @@ const getSingleBlog = asyncHandler(async (req, res) => {
       },
     });
   } else {
-    res.status(404).json({ message: "Blog not found", success: false });
+    res.status(404).json({ message: "Blog not found.", success: false });
   }
 });
 
@@ -143,11 +138,11 @@ const updateBlog = asyncHandler(async (req, res) => {
 // @access Private
 const deleteMultipleBlogs = asyncHandler(async (req, res) => {
   const { ids } = req.body;
-  if (ids) {
+  if (ids && ids.length > 0) {
     await Blog.deleteMany({ _id: { $in: ids } });
-    res.status(200).json({ message: "Blogs deleted successfully", success: true });
+    res.status(200).json({ message: "Blogs removed successfully", success: true });
   } else {
-    res.status(400).json({ message: "Something went wrong", success: false });
+    res.status(400).json({ message: "Provide atleast one blog id.", success: false });
   }
 });
 
@@ -183,12 +178,12 @@ const likeBlog = asyncHandler(async (req, res) => {
 const publishBlog = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id);
   if (blog) {
-    blog.published = true;
+    blog.published = !blog.published;
     blog.isDraft = false;
     const updatedBlog = await blog.save();
     res.status(200).json({
       success: true,
-      message: "Blog published successfully.",
+      message: `Blog ${blog.published ? "published" : "unpublished"} successfully.`,
       data: {
         id: updatedBlog._id,
         title: updatedBlog.title,
@@ -210,37 +205,11 @@ const publishBlog = asyncHandler(async (req, res) => {
 const archiveBlog = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id);
   if (blog) {
-    blog.isArchived = true;
+    blog.isArchived = !blog.isArchived;
     const updatedBlog = await blog.save();
     res.status(200).json({
       success: true,
-      message: "Blog archived successfully.",
-      data: {
-        id: updatedBlog._id,
-        title: updatedBlog.title,
-        description: updatedBlog.description,
-        image: updatedBlog.image,
-        content: updatedBlog.content,
-        createdAt: updatedBlog.createdAt,
-        isArchived: updatedBlog.isArchived,
-      },
-    });
-  } else {
-    res.status(404).json({ message: "Blog not found", success: false });
-  }
-});
-
-// @desc unarchive Blog
-// @route PUT /api-v1/blog/unarchive/:id
-// @access Private
-const unarchiveBlog = asyncHandler(async (req, res) => {
-  const blog = await Blog.findById(req.params.id);
-  if (blog) {
-    blog.isArchived = false;
-    const updatedBlog = await blog.save();
-    res.status(200).json({
-      success: true,
-      message: "Blog unarchived successfully.",
+      message: `Blog ${blog.isArchived ? "archived" : "unarchived"} successfully.`,
       data: {
         id: updatedBlog._id,
         title: updatedBlog.title,
@@ -265,5 +234,4 @@ module.exports = {
   likeBlog,
   publishBlog,
   archiveBlog,
-  unarchiveBlog,
 };

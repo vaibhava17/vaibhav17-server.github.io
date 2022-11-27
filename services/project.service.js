@@ -14,7 +14,7 @@ const createProject = asyncHandler(async (req, res) => {
       message: "Project added successfully",
     });
   } else {
-    res.status(400).json({ message: "Something went wrong.", success: false });
+    res.status(401).json({ message: "Something went wrong.", success: false });
   }
 });
 
@@ -43,15 +43,10 @@ const getProjects = asyncHandler(async (req, res) => {
   return Project.aggregatePaginate(Project.aggregate(query), option).then((data) => {
     res.status(200).json({
       success: true,
-      message: "All the messages are fetched successfully.",
+      message: "projects list",
       total: data.totalDocs,
       pageSize: data.limit,
-      totalPages: data.totalPages,
       current: data.page,
-      hasPrevPage: data.hasPrevPage,
-      hasNextPage: data.hasNextPage,
-      prevPage: data.prevPage,
-      nextPage: data.nextPage,
       items: data.docs.map((item) => {
         return {
           id: item._id,
@@ -118,7 +113,7 @@ const updateProject = asyncHandler(async (req, res) => {
       },
     });
   } else {
-    res.status(404).json({ message: "Blog not found", success: false });
+    res.status(404).json({ message: "Project not found", success: false });
   }
 });
 
@@ -129,9 +124,9 @@ const deleteMultipleProjects = asyncHandler(async (req, res) => {
   const { ids } = req.body;
   if (ids) {
     await Project.deleteMany({ _id: { $in: ids } });
-    res.status(200).json({ message: "Projects deleted successfully", success: true });
+    res.status(200).json({ message: "Projects removed successfully", success: true });
   } else {
-    res.status(400).json({ message: "Something went wrong", success: false });
+    res.status(400).json({ message: "Provide atleast one blog id", success: false });
   }
 });
 

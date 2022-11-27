@@ -39,7 +39,14 @@ const login = asyncHandler(async (req, res) => {
 // @route   POST /api-v1/user/auth
 // @access  Private
 const authantication = asyncHandler(async (req, res) => {
-  const hashedToken = crypto.createHash("sha256").update(req.body.otp).digest("hex");
+  const { otp } = req.body;
+  if (!otp) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide OTP.",
+    });
+  }
+  const hashedToken = crypto.createHash("sha256").update(otp).digest("hex");
   const user = await User.findOne({
     _id: req.user._id,
     otp: hashedToken,
