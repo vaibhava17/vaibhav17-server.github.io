@@ -35,4 +35,4 @@ node_modules/
 .vscode-test
 
 # Local data
-data/
+data/admin.user.data.js
