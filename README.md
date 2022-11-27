@@ -9,7 +9,7 @@
     <img src="./public/img/logo.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Vaibhav Portfolio Server</h3>
+  <h3 align="center">Portfolio Server</h3>
 
   <p align="center">
    A backend server for portfolio website.
