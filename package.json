@@ -7,7 +7,6 @@
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
     "start": "node server.js",
-    "deploy": "npm run build && gh-pages -d dist",
     "dev": "nodemon server.js",
     "data:import": "node utils/seeder",
     "data:destroy": "node utils/seeder -d"
