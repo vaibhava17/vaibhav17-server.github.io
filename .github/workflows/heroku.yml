@@ -1,4 +1,4 @@
-name: Staging Deployment
+name: Heroku Deployment
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: 'Deploy to Heroku'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
