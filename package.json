@@ -7,6 +7,7 @@
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles",
     "start": "node server.js",
+    "deploy": "npm run build && gh-pages -d dist",
     "dev": "nodemon server.js",
     "data:import": "node utils/seeder",
     "data:destroy": "node utils/seeder -d"
@@ -38,5 +39,8 @@
     "mongoose-aggregate-paginate-v2": "^1.0.6",
     "otp-generator": "^4.0.0",
     "twilio": "^3.83.3"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
