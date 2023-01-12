@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "c04095d5-84d1-46c8-a081-918e9c123763",
+		"name": "Personal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "17631564-c04095d5-84d1-46c8-a081-918e9c123763"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "GET /api/projects",
+					"id": "790cec1b-1b76-47f0-a760-4be6aee19d58",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/protfolio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"protfolio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/projects",
+					"id": "7e6a46b0-4993-4034-95b2-94eee9db3f9f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/protfolio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"protfolio"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c2c30a01-5d88-4983-b1cc-b183ab49154a"
+		},
+		{
+			"name": "User Auth",
+			"item": [
+				{
+					"name": "POST /api/users/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "caf888f1-f5f9-4f0e-9d7b-6870a4cfef29",
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "fa030761-62a3-497b-8d58-05fdd49d27bb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"iamvaibhav.agarwal@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/users/profile",
+					"id": "238d30d6-3bea-4908-98fc-25c0a6d5a1bd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTVmOGIwNWQ0MDBhZjhjNDA3Y2M3MCIsImlhdCI6MTYzODI3MDI3NCwiZXhwIjoxNjM4ODc1MDc0fQ.yVccSQryMTWXv27AZd8R_R_9vYBWk3wXKfSqLwESekU",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/users/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/users",
+					"id": "bf516b42-26d1-4945-ace0-0a580c9ad981",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Vaibhav Agarwal\",\r\n    \"email\": \"iamvaiamvaibhav.agarwal@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "5b99fc36-5883-4e09-8bd8-8926798eed38"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "132f1784-c65a-4c6b-8592-81f17683d324",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b0ec4ba2-ffbd-43df-83e2-15b7230debb7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
